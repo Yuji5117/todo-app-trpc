@@ -1,4 +1,8 @@
-export default function Home() {
+import { serverClient } from "./_trpc/serverClient";
+
+export default async function Home() {
+  const todos = await serverClient.getTodos();
+
   return (
     <main className="w-2/4 mx-auto mt-9">
       <div className="flex flex-col container p-4 gap-6">
@@ -15,25 +19,30 @@ export default function Home() {
         </div>
 
         <ul>
-          <li className="flex items-center justify-between bg-white shadow-md rounded-lg p-4 mb-2">
-            <span
-              className={`flex-1 ${
-                "text-gray-800"
-                // task.completed ? "line-through text-gray-500" : "text-gray-800"
-              }`}
+          {todos.map((todo) => (
+            <li
+              key={todo.id}
+              className="flex items-center justify-between bg-white shadow-md rounded-lg p-4 mb-2"
             >
-              test
-            </span>
-            {/* ここに編集・削除ボタンなど */}
-            <div className="flex items-center">
-              <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-l">
-                Edit
-              </button>
-              <button className="text-sm bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-r">
-                Delete
-              </button>
-            </div>
-          </li>
+              <span
+                className={`flex-1 ${
+                  todo.completed
+                    ? "line-through text-gray-500"
+                    : "text-gray-800"
+                }`}
+              >
+                {todo.title}
+              </span>
+              <div className="flex items-center">
+                <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-l">
+                  Edit
+                </button>
+                <button className="text-sm bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-r">
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </main>
