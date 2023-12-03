@@ -1,10 +1,41 @@
-import { Users } from "./_components/Users";
-
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>TODO</div>
-      <Users />
+    <main className="w-2/4 mx-auto mt-9">
+      <div className="flex flex-col container p-4 gap-6">
+        <h1 className="text-2xl">TODO</h1>
+        <div className="flex items-center mb-4">
+          <input
+            type="text"
+            className="input bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            placeholder="Add a new task"
+          />
+          <button className="btn ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add
+          </button>
+        </div>
+
+        <ul>
+          <li className="flex items-center justify-between bg-white shadow-md rounded-lg p-4 mb-2">
+            <span
+              className={`flex-1 ${
+                "text-gray-800"
+                // task.completed ? "line-through text-gray-500" : "text-gray-800"
+              }`}
+            >
+              test
+            </span>
+            {/* ここに編集・削除ボタンなど */}
+            <div className="flex items-center">
+              <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-l">
+                Edit
+              </button>
+              <button className="text-sm bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-r">
+                Delete
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
     </main>
   );
 }
