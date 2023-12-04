@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { serverClient } from "./_trpc/serverClient";
 
 export default async function Home() {
@@ -24,15 +25,17 @@ export default async function Home() {
               key={todo.id}
               className="flex items-center justify-between bg-white shadow-md rounded-lg p-4 mb-2"
             >
-              <span
-                className={`flex-1 ${
-                  todo.completed
-                    ? "line-through text-gray-500"
-                    : "text-gray-800"
-                }`}
-              >
-                {todo.title}
-              </span>
+              <Link href={`/todos/${todo.id}`}>
+                <span
+                  className={`flex-1 ${
+                    todo.completed
+                      ? "line-through text-gray-500"
+                      : "text-gray-800"
+                  }`}
+                >
+                  {todo.title}
+                </span>
+              </Link>
               <div className="flex items-center">
                 <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-l">
                   Edit
